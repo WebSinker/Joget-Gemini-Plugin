@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.joget.gemini</groupId>
+    <artifactId>gemini-plugin</artifactId>
+    <version>2.4.0</version>
+    <packaging>bundle</packaging>
+    
+    <name>Joget Gemini Plugin with Auto-Grading</name>
+    <description>A plugin to integrate Google Gemini API with Joget workflows including AI auto-grading functionality</description>
+    
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <dependencies>
+        <!-- Joget Core Dependencies from local lib folder -->
+        <dependency>
+            <groupId>org.joget</groupId>
+            <artifactId>wflow-core</artifactId>
+            <version>8.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/wflow-core-8.2.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.joget</groupId>
+            <artifactId>wflow-plugin-base</artifactId>
+            <version>8.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/wflow-plugin-base-8.2.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.joget</groupId>
+            <artifactId>wflow-commons</artifactId>
+            <version>8.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/wflow-commons-8.2.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.joget</groupId>
+            <artifactId>wflow-wfengine</artifactId>
+            <version>8.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/wflow-wfengine-8.2.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- OSGi Framework -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- HTTP Client with all dependencies -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.16</version>
+        </dependency>
+        
+        <!-- Commons Logging -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+        
+        <!-- JSON processing -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20231013</version>
+        </dependency>
+
+        <!-- ========================================= -->
+        <!-- AUTO-GRADING DEPENDENCIES (WORKING VERSIONS) -->
+        <!-- ========================================= -->
+        
+        <!-- Apache POI for DOCX file processing (FIXED VERSIONS) -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+        <!-- Apache PDFBox for PDF file processing (STABLE VERSIONS) -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.24</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>fontbox</artifactId>
+            <version>2.0.24</version>
+        </dependency>
+
+        <!-- Supporting dependencies for POI (WORKING VERSIONS) -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.21</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+        </dependency>
+
+        <!-- XML processing dependencies (STABLE VERSIONS) -->
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        
+        <!-- FIXED: Use SparseBitSet instead of curvesapi -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>SparseBitSet</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- Database connectivity -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>5.1.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Activator>org.joget.gemini.Activator</Bundle-Activator>
+                        <Export-Package>org.joget.gemini</Export-Package>
+                        <Import-Package>
+                            org.osgi.framework,
+                            org.joget.plugin.base,
+                            org.joget.workflow.model,
+                            org.joget.commons.util,
+                            javax.sql,
+                            java.sql,
+                            *;resolution:=optional
+                        </Import-Package>
+                        <Embed-Dependency>
+                            httpclient,
+                            httpcore,
+                            gson,
+                            commons-logging,
+                            poi,
+                            poi-ooxml,
+                            poi-ooxml-schemas,
+                            pdfbox,
+                            fontbox,
+                            commons-compress,
+                            commons-collections4,
+                            xmlbeans,
+                            SparseBitSet,
+                            mysql-connector-java
+                        </Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <_noee>true</_noee>
+                        <_removeheaders>Bnd-LastModified</_removeheaders>
+                    </instructions>
+                </configuration>
+            </plugin>
+
+            <!-- Clean local cache plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>purge-local-repository</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>purge-local-repository</goal>
+                        </goals>
+                        <configuration>
+                            <manualIncludes>
+                                <manualInclude>com.github.virtuald:curvesapi</manualInclude>
+                            </manualIncludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Ensure we're using Maven Central -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo1.maven.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+</project>

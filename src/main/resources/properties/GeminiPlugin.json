@@ -1,0 +1,61 @@
+[
+    {
+        "title": "Gemini AI Configuration",
+        "properties": [
+            {
+                "name": "apiKey",
+                "label": "@@plugin.apiKey.label@@",
+                "description": "@@plugin.apiKey.description@@",
+                "type": "password",
+                "required": "true",
+                "value": ""
+            },
+            {
+                "name": "model",
+                "label": "@@plugin.model.label@@",
+                "description": "@@plugin.model.description@@",
+                "type": "selectbox",
+                "required": "true",
+                "value": "gemini-pro",
+                "options": [
+                    {"value": "gemini-pro", "label": "Gemini Pro"},
+                    {"value": "gemini-pro-vision", "label": "Gemini Pro Vision"},
+                    {"value": "gemini-1.5-pro", "label": "Gemini 1.5 Pro"},
+                    {"value": "gemini-1.5-flash", "label": "Gemini 1.5 Flash"}
+                ]
+            },
+            {
+                "name": "prompt",
+                "label": "@@plugin.prompt.label@@",
+                "description": "@@plugin.prompt.description@@",
+                "type": "textarea",
+                "required": "true",
+                "value": ""
+            },
+            {
+                "name": "temperature",
+                "label": "@@plugin.temperature.label@@",
+                "description": "@@plugin.temperature.description@@",
+                "type": "textfield",
+                "required": "false",
+                "value": "0.7"
+            },
+            {
+                "name": "maxTokens",
+                "label": "@@plugin.maxTokens.label@@",
+                "description": "@@plugin.maxTokens.description@@",
+                "type": "textfield",
+                "required": "false",
+                "value": "1000"
+            },
+            {
+                "name": "outputVariable",
+                "label": "@@plugin.outputVariable.label@@",
+                "description": "@@plugin.outputVariable.description@@",
+                "type": "textfield",
+                "required": "false",
+                "value": "geminiResponse"
+            }
+        ]
+    }
+]

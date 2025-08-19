@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Gemini Plugin
+Bundle-SymbolicName: org.joget.gemini
+Bundle-Version: 2.0.0
+Bundle-Activator: org.joget.gemini.Activator
+Export-Package: org.joget.gemini
+Import-Package: org.osgi.framework,
+ org.joget.plugin.base,
+ org.joget.apps.app.service,
+ org.joget.workflow.model,
+ org.joget.commons.util,
+ org.apache.http.client.methods,
+ org.apache.http.impl.client,
+ org.apache.http.entity,
+ org.apache.http.util,
+ org.apache.http,
+ com.google.gson

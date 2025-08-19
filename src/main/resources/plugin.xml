@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <class>org.joget.gemini.GeminiPlugin</class>
+    <name>Gemini Chat Service</name>
+    <description>Process Tool plugin to integrate with Google Gemini API for AI-powered workflows with Ajax Update</description>
+    <version>2.0.0</version>
+    <author>APU</author>
+</plugin>
